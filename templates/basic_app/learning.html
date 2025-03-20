@@ -1,0 +1,32 @@
+{% extends "basic_app/base.html" %}
+
+{% block content %}
+<div class="container learning-container">
+    <h1 class="text-center my-4">Learning Center</h1>
+
+    {% for category, articles in categories.items %}
+    <div class="row mt-4">
+        <h2 class="text-center">{{ category }}</h2>
+        <hr>
+        {% if articles %}
+            {% for article in articles %}
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm mb-4 w-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Source: Investopedia</h6>
+                        <p class="card-text">{{ article.description }}</p>
+                        <a href="{{ article.link }}" class="btn btn-primary" target="_blank">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <p class="text-muted text-center">No articles found for {{ category }}.</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

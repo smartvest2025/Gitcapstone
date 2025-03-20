@@ -1,0 +1,98 @@
+{% extends 'basic_app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-4">
+  <div class="row">
+    <!-- Left Column: Introduction & Trending News -->
+    <div class="col-lg-8">
+      <!-- Intro Section -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Welcome to Financely</h2>
+          <p class="card-text">
+            An AI-based financial adviser and portfolio manager. Financely allows you to look up stock quotes and get streamlined technical and financial analysis,
+            news insights, future price predictions, and recommendations to buy, sell, or hold stocks.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Trending News Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3 class="mb-0">Trending News</h3>
+        </div>
+        <div class="card-body">
+          {% if news %}
+            <div class="row">
+              {% for article in news %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                  <div class="card h-100">
+                    {% if article.urlToImage %}
+                      <img src="{{ article.urlToImage }}" class="card-img-top" style="height:200px; object-fit:cover;" alt="News Image">
+                    {% else %}
+                      <img src="{% static 'images/default-news.jpg' %}" class="card-img-top" style="height:200px; object-fit:cover;" alt="Default News Image">
+                    {% endif %}
+                    <div class="card-body">
+                      <h5 class="card-title">{{ article.title }}</h5>
+                      {% if article.source %}
+                        <h6 class="card-subtitle mb-2 text-muted">Source: {{ article.source.name }}</h6>
+                      {% endif %}
+                      <p class="card-text">{{ article.description }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                      <a href="{{ article.url }}" target="_blank" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="text-center">No news available.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column: Portfolio Summary -->
+    <div class="col-lg-4">
+      <!-- Portfolio Summary Table -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3 class="mb-0">Your Portfolio</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm mb-3">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for stock in stocks %}
+              <tr>
+                <td>{{ stock.stock_symbol }}</td>
+                <td>{{ stock.stock_name }}</td>
+                <td>{{ stock.quantity }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="text-center">
+            <a href="{% url 'basic_app:portfolio' %}" class="btn btn-primary btn-sm">View Full Portfolio</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Portfolio Value Card -->
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Portfolio Value</h5>
+          <h2 class="text-success">${{ total_value|floatformat:2 }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

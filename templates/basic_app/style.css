@@ -1,0 +1,122 @@
+body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color:#f8f9fa;
+      counter-reset: Serial;
+    }
+.navbar{
+      box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    }
+.main-content {
+      flex: 1;
+    }
+.footer {
+      background-color: #f8f9fa;
+      padding: 1rem 0;
+      margin-top: auto;
+    }
+
+li a, .dropbtn {
+  color: white;
+  text-decoration: none;
+}
+.results-box{
+  padding: 20px;
+  text-align: center;
+}
+
+li, .dropdown-self {
+  display: inline-block;
+}
+
+.options {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 12.7em;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+table {
+    border-collapse: separate;
+}
+
+tr td:first-child:before {
+  counter-increment: Serial;
+  content:  counter(Serial);
+}
+
+/* learning.css */
+.learning-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+

@@ -1,0 +1,169 @@
+{% extends 'basic_app/base.html' %}
+{% load static %}
+
+{% comment %}
+Override the hero block (if defined in base.html) so that the welcome section is removed
+{% endcomment %}
+{% block hero %}{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <!-- Stock Header Section -->
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h2 class="mb-0">{{ info.shortName }} <small class="text-muted">{{ info.symbol }}</small></h2>
+    </div>
+    <div class="col-md-4 text-end">
+      {% if recommendation %}
+        <span class="badge bg-success">Recommended</span>
+      {% else %}
+        <span class="badge bg-danger">Not Recommended</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <a href="{% url 'basic_app:addToPortfolio' info.symbol %}" class="btn btn-primary">Add to Portfolio</a>
+    </div>
+  </div>
+
+  <!-- Main Content Section -->
+  <div class="row">
+    <!-- Left Column: Stock Summary & Historical Chart -->
+    <div class="col-lg-8">
+      <!-- Stock Summary -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Stock Summary</h5>
+          <p class="card-text">{{ info.longBusinessSummary }}</p>
+        </div>
+      </div>
+      
+      <!-- Historical Price Chart -->
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">Historical Price Chart</h5>
+          {% if history_graph %}
+            <img src="data:image/png;base64,{{ history_graph }}" alt="Historical Price Chart" class="img-fluid">
+          {% else %}
+            <p>No historical data available.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column: Key Metrics, Financial Health & News Sentiment -->
+    <div class="col-lg-4">
+      <!-- Key Metrics -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Key Metrics</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Current Price</span>
+              <span class="fw-bold">${{ info.currentPrice }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Market Cap</span>
+              <span class="fw-bold">${{ info.marketCap }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Dividend Yield</span>
+              <span class="fw-bold">{{ info.dividendYield }}%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Financial Health -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Financial Health</h5>
+        </div>
+        <div class="card-body">
+          <p>Piotroski Score: {{ piotroski_score }}/9</p>
+          <div class="progress mb-2">
+            <div id="piotroski-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+          </div>
+          <p class="small text-muted">A higher score indicates better financial health.</p>
+        </div>
+      </div>
+      
+      <!-- News Sentiment -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">News Sentiment</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="densityChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript Section -->
+<!-- Chart.js for News Sentiment -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Parse sentiment data and Piotroski score passed from the view
+  var sentiment_data = JSON.parse('{{ sentiment_data | escapejs }}');
+  var score = JSON.parse('{{ piotroski_score | escapejs }}');
+  var percentage = Math.floor((score / 9) * 100);
+
+  // Animate Progress Bar for Piotroski Score
+  var progressBar = document.getElementById("piotroski-bar");
+  var i = 0;
+  function animateProgressBar() {
+    if (i <= percentage) {
+      progressBar.style.width = i + "%";
+      if (i < 33) progressBar.classList.add("bg-danger");
+      else if (i < 66) progressBar.classList.replace("bg-danger", "bg-warning");
+      else progressBar.classList.replace("bg-warning", "bg-success");
+      i++;
+      setTimeout(animateProgressBar, 20);
+    }
+  }
+  animateProgressBar();
+
+  // Render News Sentiment Chart using Chart.js
+  var densityCanvas = document.getElementById("densityChart");
+  var densityData = {
+    labels: ["Positive", "Negative", "Neutral"],
+    datasets: [{
+      label: 'News Sentiment',
+      data: [
+        parseInt(sentiment_data.positive) || 0,
+        parseInt(sentiment_data.negative) || 0,
+        parseInt(sentiment_data.neutral) || 0
+      ],
+      backgroundColor: [
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 205, 86, 0.2)'
+      ],
+      borderColor: [
+        'rgba(75, 192, 192, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 205, 86, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  var barChart = new Chart(densityCanvas, {
+    type: 'bar',
+    data: densityData,
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+</script>
+{% endblock %}
