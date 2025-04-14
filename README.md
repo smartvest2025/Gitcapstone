@@ -24,7 +24,7 @@ https://github.com/smartvest2025/Gitcapstone.git
 ```
 pip install -r requirementsnew.txt
 ```
-4. Download our sentiment analysis model from <a href='[https://drive.google.com/file/d/1vGN0481ovU6mQZkgKO2lLAGMKnXVbufi/view?usp=sharing](https://drive.google.com/file/d/1u4UnozW0tc36Brb41Ka_SNir-nEaNK04/view?usp=sharing)'>here</a> and place it inside the directory `Gitcapstone/basic_app/`
+4. Download our sentiment analysis model from <a href='https://drive.google.com/file/d/1vGN0481ovU6mQZkgKO2lLAGMKnXVbufi/view?usp=sharing](https://drive.google.com/file/d/1u4UnozW0tc36Brb41Ka_SNir-nEaNK04/view?usp=sharing)'>here</a> and place it inside the directory `Gitcapstone/basic_app/`
 
 5. After the above setup, run the following commands
 ```
