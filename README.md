@@ -22,7 +22,7 @@ https://github.com/smartvest2025/Gitcapstone.git
 2. Activate your virtual Python environment
 3. To download the required packages run the commands below
 ```
-pip install -r requirements.txt
+pip install -r requirementsnew.txt
 ```
 4. Download our sentiment analysis model from <a href='[https://drive.google.com/file/d/1vGN0481ovU6mQZkgKO2lLAGMKnXVbufi/view?usp=sharing](https://drive.google.com/file/d/1u4UnozW0tc36Brb41Ka_SNir-nEaNK04/view?usp=sharing)'>here</a> and place it inside the directory `Gitcapstone/basic_app/`
 
