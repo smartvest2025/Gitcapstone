@@ -1,21 +1,30 @@
 # SmartVest
 
-<center><img src="assets/logo.png" alt="logo" height="200px" width="270px"></center>
-Financely is an AI based financial adviser and user portfolio management system. The aim of this project is to help people become financially independent by demystifying trading and the stock market and making them more accessible to people without a formal education in the field.
+<center><img src="static/images/logo.jpg" alt="logo" height="200px" width="270px"></center>
+SmartVest is a modern financial advisory platform designed to empower individual investors with AI-driven insights, real-time market data, and educational resources. It combines portfolio management tools, predictive analytics, sentiment analysis, and an interactive learning module to simplify investment decisions. The platform offers features like:
+
+1.Real-time stock tracking
+
+2.Personalized portfolio recommendations
+
+3.Dynamic data visualization
+
+4.Educational content to enhance financial literacy
+
+Built as a web application, SmartVest bridges the gap between complex financial tools and everyday investors, making smart investing accessible to all.
 
 # Setting up and running the project
 
 1. Fork the repo and clone it
 ```
-git clone https://github.com/EnigmAI/Financely.git
-cd financely
+https://github.com/smartvest2025/Gitcapstone.git
 ```
-2. Activate your conda or virtual Python environment
+2. Activate your virtual Python environment
 3. To download the required packages run the commands below
 ```
 pip install -r requirements.txt
 ```
-4. Download our sentiment analysis model from <a href='https://drive.google.com/file/d/1vGN0481ovU6mQZkgKO2lLAGMKnXVbufi/view?usp=sharing'>here</a> and place it inside the directory `Financely/basic_app/`
+4. Download our sentiment analysis model from <a href='[https://drive.google.com/file/d/1vGN0481ovU6mQZkgKO2lLAGMKnXVbufi/view?usp=sharing](https://drive.google.com/file/d/1u4UnozW0tc36Brb41Ka_SNir-nEaNK04/view?usp=sharing)'>here</a> and place it inside the directory `Gitcapstone/basic_app/`
 
 5. After the above setup, run the following commands
 ```
@@ -32,24 +41,8 @@ python manage.py runserver
 http://localhost:8000
 ```
 
-# Models and Analysis
-
-1. <strong>Technical Analysis Indicators</strong>:
-    - RSI
-    - MACD
-    - EMA
-    - SMA
-    - OBV
-    - Pivot Points
-2. <strong>Financial Analysis</strong> - Piotroski Score
-3. <strong>Price Forecasting</strong> - Facebook Prophet Model
-4. <strong>Sentiment Analysis</strong> - Fine-tuned BERT model
 
 # Preview
 
-Project Demo Video Link - https://drive.google.com/file/d/1ehs1m1HP4O2smAXmWmnmH4Y-k36jBmf0/view?usp=sharing
+Project Demo Video Link - https://drive.google.com/file/d/1_VMMaJuorQlay-BZHBlu-2KJMfMqu0Cz/view?usp=sharing
 
-| ![](assets/1.png) | ![](assets/2.png) |
-|:------------------|:------------------|
-| ![](assets/3.png) | ![](assets/4.png) |
-| ![](assets/5.png) | ![](assets/6.png) |
